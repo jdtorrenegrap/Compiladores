@@ -1,0 +1,326 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    COMMA
+
+Grammar
+
+Rule 0     S' -> sentencias
+Rule 1     sentencias -> sentencias sentencia
+Rule 2     sentencias -> sentencia
+Rule 3     sentencia -> ID ASSIGN expresion SEMICOLON
+Rule 4     sentencia -> MENSAJE PUNTO TEXTO LPAREN STRING RPAREN SEMICOLON
+Rule 5     expresion -> expresion PLUS expresion
+Rule 6     expresion -> expresion TIMES expresion
+Rule 7     expresion -> LPAREN expresion RPAREN
+Rule 8     expresion -> NUMBER
+Rule 9     expresion -> STRING
+Rule 10    expresion -> ID
+
+Terminals, with rules where they appear
+
+ASSIGN               : 3
+COMMA                : 
+ID                   : 3 10
+LPAREN               : 4 7
+MENSAJE              : 4
+NUMBER               : 8
+PLUS                 : 5
+PUNTO                : 4
+RPAREN               : 4 7
+SEMICOLON            : 3 4
+STRING               : 4 9
+TEXTO                : 4
+TIMES                : 6
+error                : 
+
+Nonterminals, with rules where they appear
+
+expresion            : 3 5 5 6 6 7
+sentencia            : 1 2
+sentencias           : 1 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . sentencias
+    (1) sentencias -> . sentencias sentencia
+    (2) sentencias -> . sentencia
+    (3) sentencia -> . ID ASSIGN expresion SEMICOLON
+    (4) sentencia -> . MENSAJE PUNTO TEXTO LPAREN STRING RPAREN SEMICOLON
+
+    ID              shift and go to state 3
+    MENSAJE         shift and go to state 4
+
+    sentencias                     shift and go to state 1
+    sentencia                      shift and go to state 2
+
+state 1
+
+    (0) S' -> sentencias .
+    (1) sentencias -> sentencias . sentencia
+    (3) sentencia -> . ID ASSIGN expresion SEMICOLON
+    (4) sentencia -> . MENSAJE PUNTO TEXTO LPAREN STRING RPAREN SEMICOLON
+
+    ID              shift and go to state 3
+    MENSAJE         shift and go to state 4
+
+    sentencia                      shift and go to state 5
+
+state 2
+
+    (2) sentencias -> sentencia .
+
+    ID              reduce using rule 2 (sentencias -> sentencia .)
+    MENSAJE         reduce using rule 2 (sentencias -> sentencia .)
+    $end            reduce using rule 2 (sentencias -> sentencia .)
+
+
+state 3
+
+    (3) sentencia -> ID . ASSIGN expresion SEMICOLON
+
+    ASSIGN          shift and go to state 6
+
+
+state 4
+
+    (4) sentencia -> MENSAJE . PUNTO TEXTO LPAREN STRING RPAREN SEMICOLON
+
+    PUNTO           shift and go to state 7
+
+
+state 5
+
+    (1) sentencias -> sentencias sentencia .
+
+    ID              reduce using rule 1 (sentencias -> sentencias sentencia .)
+    MENSAJE         reduce using rule 1 (sentencias -> sentencias sentencia .)
+    $end            reduce using rule 1 (sentencias -> sentencias sentencia .)
+
+
+state 6
+
+    (3) sentencia -> ID ASSIGN . expresion SEMICOLON
+    (5) expresion -> . expresion PLUS expresion
+    (6) expresion -> . expresion TIMES expresion
+    (7) expresion -> . LPAREN expresion RPAREN
+    (8) expresion -> . NUMBER
+    (9) expresion -> . STRING
+    (10) expresion -> . ID
+
+    LPAREN          shift and go to state 10
+    NUMBER          shift and go to state 11
+    STRING          shift and go to state 12
+    ID              shift and go to state 8
+
+    expresion                      shift and go to state 9
+
+state 7
+
+    (4) sentencia -> MENSAJE PUNTO . TEXTO LPAREN STRING RPAREN SEMICOLON
+
+    TEXTO           shift and go to state 13
+
+
+state 8
+
+    (10) expresion -> ID .
+
+    SEMICOLON       reduce using rule 10 (expresion -> ID .)
+    PLUS            reduce using rule 10 (expresion -> ID .)
+    TIMES           reduce using rule 10 (expresion -> ID .)
+    RPAREN          reduce using rule 10 (expresion -> ID .)
+
+
+state 9
+
+    (3) sentencia -> ID ASSIGN expresion . SEMICOLON
+    (5) expresion -> expresion . PLUS expresion
+    (6) expresion -> expresion . TIMES expresion
+
+    SEMICOLON       shift and go to state 14
+    PLUS            shift and go to state 15
+    TIMES           shift and go to state 16
+
+
+state 10
+
+    (7) expresion -> LPAREN . expresion RPAREN
+    (5) expresion -> . expresion PLUS expresion
+    (6) expresion -> . expresion TIMES expresion
+    (7) expresion -> . LPAREN expresion RPAREN
+    (8) expresion -> . NUMBER
+    (9) expresion -> . STRING
+    (10) expresion -> . ID
+
+    LPAREN          shift and go to state 10
+    NUMBER          shift and go to state 11
+    STRING          shift and go to state 12
+    ID              shift and go to state 8
+
+    expresion                      shift and go to state 17
+
+state 11
+
+    (8) expresion -> NUMBER .
+
+    SEMICOLON       reduce using rule 8 (expresion -> NUMBER .)
+    PLUS            reduce using rule 8 (expresion -> NUMBER .)
+    TIMES           reduce using rule 8 (expresion -> NUMBER .)
+    RPAREN          reduce using rule 8 (expresion -> NUMBER .)
+
+
+state 12
+
+    (9) expresion -> STRING .
+
+    SEMICOLON       reduce using rule 9 (expresion -> STRING .)
+    PLUS            reduce using rule 9 (expresion -> STRING .)
+    TIMES           reduce using rule 9 (expresion -> STRING .)
+    RPAREN          reduce using rule 9 (expresion -> STRING .)
+
+
+state 13
+
+    (4) sentencia -> MENSAJE PUNTO TEXTO . LPAREN STRING RPAREN SEMICOLON
+
+    LPAREN          shift and go to state 18
+
+
+state 14
+
+    (3) sentencia -> ID ASSIGN expresion SEMICOLON .
+
+    ID              reduce using rule 3 (sentencia -> ID ASSIGN expresion SEMICOLON .)
+    MENSAJE         reduce using rule 3 (sentencia -> ID ASSIGN expresion SEMICOLON .)
+    $end            reduce using rule 3 (sentencia -> ID ASSIGN expresion SEMICOLON .)
+
+
+state 15
+
+    (5) expresion -> expresion PLUS . expresion
+    (5) expresion -> . expresion PLUS expresion
+    (6) expresion -> . expresion TIMES expresion
+    (7) expresion -> . LPAREN expresion RPAREN
+    (8) expresion -> . NUMBER
+    (9) expresion -> . STRING
+    (10) expresion -> . ID
+
+    LPAREN          shift and go to state 10
+    NUMBER          shift and go to state 11
+    STRING          shift and go to state 12
+    ID              shift and go to state 8
+
+    expresion                      shift and go to state 19
+
+state 16
+
+    (6) expresion -> expresion TIMES . expresion
+    (5) expresion -> . expresion PLUS expresion
+    (6) expresion -> . expresion TIMES expresion
+    (7) expresion -> . LPAREN expresion RPAREN
+    (8) expresion -> . NUMBER
+    (9) expresion -> . STRING
+    (10) expresion -> . ID
+
+    LPAREN          shift and go to state 10
+    NUMBER          shift and go to state 11
+    STRING          shift and go to state 12
+    ID              shift and go to state 8
+
+    expresion                      shift and go to state 20
+
+state 17
+
+    (7) expresion -> LPAREN expresion . RPAREN
+    (5) expresion -> expresion . PLUS expresion
+    (6) expresion -> expresion . TIMES expresion
+
+    RPAREN          shift and go to state 21
+    PLUS            shift and go to state 15
+    TIMES           shift and go to state 16
+
+
+state 18
+
+    (4) sentencia -> MENSAJE PUNTO TEXTO LPAREN . STRING RPAREN SEMICOLON
+
+    STRING          shift and go to state 22
+
+
+state 19
+
+    (5) expresion -> expresion PLUS expresion .
+    (5) expresion -> expresion . PLUS expresion
+    (6) expresion -> expresion . TIMES expresion
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+    SEMICOLON       reduce using rule 5 (expresion -> expresion PLUS expresion .)
+    RPAREN          reduce using rule 5 (expresion -> expresion PLUS expresion .)
+    PLUS            shift and go to state 15
+    TIMES           shift and go to state 16
+
+  ! PLUS            [ reduce using rule 5 (expresion -> expresion PLUS expresion .) ]
+  ! TIMES           [ reduce using rule 5 (expresion -> expresion PLUS expresion .) ]
+
+
+state 20
+
+    (6) expresion -> expresion TIMES expresion .
+    (5) expresion -> expresion . PLUS expresion
+    (6) expresion -> expresion . TIMES expresion
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+    SEMICOLON       reduce using rule 6 (expresion -> expresion TIMES expresion .)
+    RPAREN          reduce using rule 6 (expresion -> expresion TIMES expresion .)
+    PLUS            shift and go to state 15
+    TIMES           shift and go to state 16
+
+  ! PLUS            [ reduce using rule 6 (expresion -> expresion TIMES expresion .) ]
+  ! TIMES           [ reduce using rule 6 (expresion -> expresion TIMES expresion .) ]
+
+
+state 21
+
+    (7) expresion -> LPAREN expresion RPAREN .
+
+    SEMICOLON       reduce using rule 7 (expresion -> LPAREN expresion RPAREN .)
+    PLUS            reduce using rule 7 (expresion -> LPAREN expresion RPAREN .)
+    TIMES           reduce using rule 7 (expresion -> LPAREN expresion RPAREN .)
+    RPAREN          reduce using rule 7 (expresion -> LPAREN expresion RPAREN .)
+
+
+state 22
+
+    (4) sentencia -> MENSAJE PUNTO TEXTO LPAREN STRING . RPAREN SEMICOLON
+
+    RPAREN          shift and go to state 23
+
+
+state 23
+
+    (4) sentencia -> MENSAJE PUNTO TEXTO LPAREN STRING RPAREN . SEMICOLON
+
+    SEMICOLON       shift and go to state 24
+
+
+state 24
+
+    (4) sentencia -> MENSAJE PUNTO TEXTO LPAREN STRING RPAREN SEMICOLON .
+
+    ID              reduce using rule 4 (sentencia -> MENSAJE PUNTO TEXTO LPAREN STRING RPAREN SEMICOLON .)
+    MENSAJE         reduce using rule 4 (sentencia -> MENSAJE PUNTO TEXTO LPAREN STRING RPAREN SEMICOLON .)
+    $end            reduce using rule 4 (sentencia -> MENSAJE PUNTO TEXTO LPAREN STRING RPAREN SEMICOLON .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for PLUS in state 19 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 19 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 20 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 20 resolved as shift
